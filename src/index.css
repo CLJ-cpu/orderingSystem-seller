@@ -1,3 +1,27 @@
+html {
+  font-size: 24px;
+}
+@media screen and (max-width: 960px) {
+  /* 大屏幕电脑 */
+  html {
+    font-size: 45px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* 中屏幕平板 */
+  html {
+    font-size: 32px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  /* iphone12 小屏幕手机*/
+  html {
+    font-size: 32px;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
