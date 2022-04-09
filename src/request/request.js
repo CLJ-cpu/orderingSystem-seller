@@ -1,6 +1,7 @@
-import fetch from 'dva/fetch';
-import { Toast } from 'antd-mobile';
-import { ORIGIN } from '../constants';
+import fetch from "dva/fetch";
+import { Toast } from "antd-mobile";
+// import { ORIGIN } from '../constants';
+const ORIGIN = "http://192.168.31.99:9000/api";
 //响应拦截
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -9,7 +10,10 @@ function checkStatus(response) {
     window.location.href = `${window.location.pathname}#/login`;
     return response;
   } else if (response.status === 400) {
-    Toast.fail(`请求错误: ${response.status} ${response.statusText}`);
+    Toast.show({
+      icon: 'fail',
+      content: `请求错误: ${response.status} ${response.statusText}`,
+    })
   }
 
   return response;
@@ -24,24 +28,36 @@ function checkStatus(response) {
  */
 //请求拦截
 export default function request(url, options = {}) {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const defaultOptions = {
     // credentials: 'include',
     headers: {
-      Accept: 'application/json',
+      Accept: "application/json",
     },
   };
-  const newOptions = { ...defaultOptions, ...options, headers: { ...defaultOptions.headers, ...options.headers } };
+  const newOptions = {
+    ...defaultOptions,
+    ...options,
+    headers: { ...defaultOptions.headers, ...options.headers },
+  };
   if (token) {
     newOptions.headers.Authorization = token;
   }
-  if (newOptions.method === 'POST' || newOptions.method === 'PUT' || newOptions.method === 'DELETE') {
+  if (
+    newOptions.method === "POST" ||
+    newOptions.method === "PUT" ||
+    newOptions.method === "DELETE"
+  ) {
     newOptions.headers = {
-      'Content-Type': 'application/json; charset=utf-8',
+      "Content-Type": "application/json; charset=utf-8",
       ...newOptions.headers,
     };
-    if(newOptions.headers['Content-Type'] === '') delete newOptions.headers['Content-Type'];
-    newOptions.body = newOptions.body instanceof FormData ? newOptions.body : JSON.stringify(newOptions.body);
+    if (newOptions.headers["Content-Type"] === "")
+      delete newOptions.headers["Content-Type"];
+    newOptions.body =
+      newOptions.body instanceof FormData
+        ? newOptions.body
+        : JSON.stringify(newOptions.body);
   }
   const origin = ORIGIN;
   return fetch(/^http/.test(url) ? url : `${origin}${url}`, newOptions)
@@ -60,10 +76,16 @@ export default function request(url, options = {}) {
     })
     .catch((error) => {
       if (error.code) {
-        Toast.fail(error.name);
+        Toast.show({
+          icon: 'fail',
+          content: error.name,
+        })
       }
-      if ('stack' in error && 'message' in error) {
-        Toast.fail(`请求错误: ${error.message}`);
+      if ("stack" in error && "message" in error) {
+        Toast.show({
+          icon: 'fail',
+          content: `请求错误: ${error.message}`,
+        })
       }
       return error;
     });

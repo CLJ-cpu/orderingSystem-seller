@@ -1,12 +1,12 @@
 import React, {PureComponent} from 'react'
 import {Routes, Route} from 'react-router-dom'
-import Login from './form'
+import StepOne from './StepOne'
 
 class Index extends PureComponent {
   render() {
     return (
       <Routes>
-        <Route path="/" exact element={<Login/>} />
+        <Route path="/" exact element={<StepOne/>} />
       </Routes>
     )
   }

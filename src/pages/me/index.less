@@ -1,0 +1,83 @@
+@base-color: #6592ed;
+
+.indexPage {
+   padding: 0 10px;
+
+   .header {
+      padding        : 0 10px;
+      display        : flex;
+      justify-content: space-between;
+      align-items    : center;
+
+      .headerButton {
+         border-radius: 15px;
+         height       : 40px;
+         background   : @base-color;
+         color        : #fff;
+      }
+   }
+}
+
+.infoList {
+   :global {
+      .adm-list-item-content-extra {
+         max-width         : 60%;
+         text-overflow     : -o-ellipsis-lastline;
+         overflow          : hidden;
+         text-overflow     : ellipsis;
+         display           : -webkit-box;
+         -webkit-line-clamp: 2;
+         line-clamp        : 2;
+         -webkit-box-orient: vertical;
+      }
+   }
+}
+
+.status {
+   background-color: #e4f6ef;
+   margin          : 30px 10px;
+   height          : 180px;
+   border-radius   : 10px;
+   display         : flex;
+   flex-direction  : column;
+   justify-content : space-between;
+
+   .top {
+      text-align  : left;
+      padding-left: 30px;
+
+      h2 {
+         margin-bottom: 5px;
+
+         .light {
+            height          : 12px;
+            width           : 12px;
+            background-color: green;
+            position        : absolute;
+            border-radius   : 6px;
+            transform       : translate(-15px, 8px);
+
+         }
+
+      }
+   }
+
+   .bottom {
+      height          : 100px;
+      background-color: #fff;
+      border-radius   : 10px;
+      display         : block;
+      text-align      : left;
+
+      :global {
+         .adm-list {
+            margin: 20px 0;
+
+            .adm-list-body {
+               border: 0;
+            }
+         }
+
+      }
+   }
+}

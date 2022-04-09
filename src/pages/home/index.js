@@ -8,7 +8,7 @@ const Index = () => {
    return (
       <div className={styles.home}>
          <div className={styles.content}>
-            {/* {renderContent()} */}
+            home
          </div>
       </div>)
 }
