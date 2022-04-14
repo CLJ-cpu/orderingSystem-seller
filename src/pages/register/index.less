@@ -8,9 +8,24 @@
 
    .content {
       padding: 20px;
-      .input{
-         margin-top:25px;
+
+      .input {
+         margin-top   : 25px;
          border-bottom: 1px solid #ccc;
       }
    }
+}
+
+.apply {
+   .stepCard{
+      :global {
+      .adm-card{
+         height:100px;
+      }
+      .adm-step-status-process {
+         --icon-color: @baseColor;
+      }
+   }
+   }
+
 }

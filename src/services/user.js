@@ -1,4 +1,5 @@
 import request from "../request/request.js";
+import { stringify } from 'querystring';
 
 export const login = (data) => {
   return request("/users/login", {
@@ -11,4 +12,7 @@ export const register = (data) => {
     method: "POST",
     body: data,
   })
+}
+export const getUser=(params)=>{
+  return request(`/user?${stringify(params)}`)
 }
