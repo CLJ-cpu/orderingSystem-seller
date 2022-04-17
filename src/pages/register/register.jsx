@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { NavBar, Form, Input, Button, Checkbox, Toast } from "antd-mobile";
+import { NavBar,  Input, Button, Toast } from "antd-mobile";
 import styles from "./index.less";
 import { useNavigate } from "react-router-dom";
 import * as user from "../../services/user";
-import ApplyStore from './apply'
+// import ApplyStore from './apply'
 
 const Index = (props) => {
   const navigate = useNavigate();
@@ -27,8 +27,8 @@ const Index = (props) => {
         setStep(3);
         setNumber();
       } else if (!res.user.hasStore) {
-        //已经注册,但未绑定店铺信息，去设置店铺信息
-        navigate("/register/apply?_id="+res.user._id);
+        //已经注册,但店铺信息未完善，去设置店铺信息
+        navigate("/register/apply?store_id="+res.user.store?._id);
       } else {
         //显示已经注册过
         Toast.show({
@@ -44,7 +44,7 @@ const Index = (props) => {
   const register = () => {
     setFormData({ ...formData, password: number });
     user.register({ user: formData }).then((res) => {
-      if(!res.errors) navigate("/register/apply");
+      if(!res.errors) navigate("/register/apply?store_id="+res?.user?.store?._id);
       else {
         Toast.show({
           content:'注册失败'
@@ -95,7 +95,7 @@ const Index = (props) => {
             </Button>
             <span>
               已有账号，去
-              <a style={{ color: "#6495ED" }} onClick={backToLogin}>
+              <a style={{ color: "#6495ED" }} onClick={backToLogin} href="">
                 登录
               </a>
               &gt;
@@ -110,7 +110,7 @@ const Index = (props) => {
                 手机号<span className={styles.baseColor}>{formData.phone}</span>
                 ，请查收
               </span>
-              <a className={styles.baseColor}>重新获取</a>
+              <a className={styles.baseColor} href="">重新获取</a>
             </div>
             <Input
               className={styles.input}
@@ -144,7 +144,7 @@ const Index = (props) => {
               placeholder="输入6位及以上密码"
               type="password"
               clearable
-              value={number}
+              value={formData.password}
               onChange={(val) => setFormData({ ...formData, password: val })}
             />
             <Button

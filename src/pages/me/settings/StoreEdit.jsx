@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { List, NavBar, Input, Form,Button } from "antd-mobile";
+import { List, NavBar, Button } from "antd-mobile";
 import styles from "../index.less";
 const Index = () => {
   const defaultData = {
@@ -26,7 +26,7 @@ const Index = () => {
           src="/img/icecream.jpeg"
           alt="店铺头像"
         />
-        <h3 style={{textAlign: "center"}}>{formData.storename}</h3>
+        <h3 style={{ textAlign: "center" }}>{formData.storename}</h3>
         <div className={styles.status}>
           <div className={styles.top}>
             <h2>
@@ -35,14 +35,14 @@ const Index = () => {
             <span>本店目前正常营业中</span>
           </div>
           <div className={styles.bottom}>
-          <List >
-            <List.Item description={<strong>8:50-21:25</strong>} clickable>
-              今日营业时间
-            </List.Item>
-          </List>
+            <List>
+              <List.Item description={<strong>8:50-21:25</strong>} clickable>
+                今日营业时间
+              </List.Item>
+            </List>
           </div>
         </div>
-      <Button style={{width:'80%',margin:'0 10%'}}>停止营业</Button>
+        <Button style={{ width: "80%", margin: "0 10%" }}>停止营业</Button>
       </div>
     </div>
   );

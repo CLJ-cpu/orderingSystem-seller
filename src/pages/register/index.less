@@ -17,15 +17,43 @@
 }
 
 .apply {
-   .stepCard{
+   .stepCard {
+      background-color: rgba(0, 0, 0, 0) !important;
+      height          : 80px;
+
       :global {
-      .adm-card{
-         height:100px;
+         // .adm-card{
+
+         // }
+         .adm-step-status-process {
+            --icon-color: @baseColor;
+         }
       }
-      .adm-step-status-process {
-         --icon-color: @baseColor;
-      }
-   }
    }
 
+}
+
+.applyForm {
+
+   .title {
+      text-align: center;
+      font-size : 20px;
+
+      span {
+         font-weight: normal;
+         font-size  : 18px;
+      }
+   }
+
+   .cardForm {
+      :global {
+         .adm-list-card {
+            background: #fff;
+         }
+
+         .adm-list-body {
+            background: none;
+         }
+      }
+   }
 }

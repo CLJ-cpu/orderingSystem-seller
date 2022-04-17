@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   NavBar,
   Form,
@@ -15,32 +15,28 @@ const Index = (props) => {
   const [form] = Form.useForm();
   const [ispasswordLogin, setIsPasswordLogin] = useState(true);
   const [acceptTerms, setAcceptTerms] = useState();
-  const [test,setTest]=useState(1)
+  // const [test,setTest]=useState(1)
   const navigate = useNavigate();
   // useEffect(() => {
   //    let navigate = useNavigate();
   // }, [])
   const loginToHome = () => {
-    
     form.validateFields().then((values) => {
       if (acceptTerms) {
         user.login({ user: values }).then((res) => {
-          setTest('?')
           if (res.success) {
-            setTest(res.token)
             localStorage.setItem("token", res.token);
             Toast.show({
               duration: 1000,
               icon: "success",
               content: "登录成功",
             });
-            setTimeout(()=> navigate("/home"),1000)
-          }else{
-            setTest(res.errors[0].msg)
+            setTimeout(() => navigate("/home"), 1000);
+          } else {
             Toast.show({
               duration: 1000,
               content: res.errors[0].msg,
-            })
+            });
           }
         });
       } else {
@@ -94,7 +90,9 @@ const Index = (props) => {
           label="手机号"
           extra={
             <div className={styles.extraPart}>
-              <a>获取验证码</a>
+              <a href="" onClick={() => {}}>
+                获取验证码
+              </a>
             </div>
           }
         >
@@ -112,6 +110,7 @@ const Index = (props) => {
         back={null}
         right={
           <a
+            href=""
             style={{ color: "#6495ED", fontSize: "0.5rem" }}
             onClick={() => navigate("/register")}
           >
@@ -122,7 +121,7 @@ const Index = (props) => {
           "--border-bottom": "2px #eee solid",
         }}
       >
-        登录{test}
+        登录
       </NavBar>
       <div className={styles.content}>
         <div className={styles.login}>
@@ -153,7 +152,10 @@ const Index = (props) => {
           忘记账号和密码
         </Button>
         <div className={styles.footer}>
-          <Checkbox checked={acceptTerms} onChange={(value) => setAcceptTerms(value)} />
+          <Checkbox
+            checked={acceptTerms}
+            onChange={(value) => setAcceptTerms(value)}
+          />
           &nbsp; 登录代表您已同意
           <a style={{ color: "#6495ED" }}>《食堂商家隐私政策》</a>
         </div>
