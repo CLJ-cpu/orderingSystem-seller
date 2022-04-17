@@ -61,7 +61,7 @@ const Index = (props) => {
                 ?.text
             }
             onClick={() =>
-              navigate("/register/apply/form?store_id=" + store_id)
+              navigate(`/register/apply/form?store_id=${store_id}&step=${step}`)
             }
           >
             店铺信息
