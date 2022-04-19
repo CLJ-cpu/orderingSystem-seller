@@ -1,0 +1,137 @@
+.home {
+   background-color: #fff;
+   height          : 100vh;
+
+
+
+   :global {
+      .adm-jumbo-tabs-header {
+         svg {
+            height: 1.2rem;
+            width : 1.2rem;
+         }
+      }
+
+      .adm-jumbo-tabs-tab-active {
+         color: #6495ED;
+
+         .adm-jumbo-tabs-tab-description {
+            background-color: #6495ED;
+         }
+      }
+   }
+
+
+   .homeOrder {
+      height  : calc(100vh - 140px);
+      overflow: scroll;
+
+      .oneLine {
+         &.expand {
+            height: auto;
+
+            .detail {
+               margin    : 0 15px;
+               padding   : 5px 10px;
+               border    : 1px solid #aaa;
+               min-height: 100px;
+            }
+         }
+
+         margin       : 25px 0px;
+         height       : 240px;
+         border-radius: 5px;
+         box-shadow   : 0 0 5px grey;
+         overflow     : hidden;
+
+         .order {
+            padding         : 10px;
+            box-sizing      : border-box;
+            border-radius   : 5px 5px 0 0;
+            background-color: #6495ED;
+            height          : 60px;
+            color           : #fff;
+            position        : relative;
+
+            h1 {
+               margin   : 0;
+               font-size: 20px;
+            }
+
+            h2 {
+               font-size: 18px;
+               margin   : 0;
+               position : absolute;
+               right    : 20px;
+               top      : 10px;
+            }
+         }
+
+         .orderer {
+            strong {
+               display  : block;
+               padding  : 5px 10px;
+               font-size: 16px;
+               color    : #666;
+            }
+
+            .orderDetail {
+               height : 90px;
+               margin : 0 15px;
+               padding: 5px 10px;
+               border : 1px solid #aaa;
+
+            }
+
+            p {
+               background-color: #FFFFE0;
+               margin          : 10px;
+               padding         : 10px 15px;
+               font-size       : 20px;
+               color           : #FF4500;
+               border-radius   : 5px;
+               // text-align: center;
+               border          : 1px dotted #aaa;
+            }
+
+            :global {
+               .adm-button {
+                  float        : right;
+                  padding      : 0;
+                  height       : 30px;
+                  width        : 70px;
+                  line-height  : 30px;
+                  margin       : 5px 10px;
+                  font-size    : 14px;
+                  border-radius: 17px;
+               }
+            }
+         }
+      }
+   }
+
+   .menu {
+      // height  : calc(100vh - 178px);
+      .menuBody {
+         // height  : calc(100vh - 178px);
+         overflow: hidden;
+
+         .side {
+            // height  : calc(100vh - 178px);
+            // overflow: scroll;
+            // position: absolute;
+            display : inline-block;
+         }
+
+         .content {
+            width:calc(100vw - 145px);
+            height  : calc(100vh - 178px);
+            overflow: scroll;
+            position: absolute;
+            left    : 140px;
+            display : inline-block;
+         }
+      }
+
+   }
+}

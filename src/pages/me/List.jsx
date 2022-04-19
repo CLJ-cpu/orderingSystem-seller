@@ -22,7 +22,7 @@ const Index = () => {
     <div className={styles.indexPage}>
       <div className={styles.header}>
         <h2>
-          Tobest天并冰淇淋&nbsp;&nbsp;
+          卤铐大叔（和香园店）&nbsp;&nbsp;
           <Button fill="none">
             <DownOutline />
           </Button>

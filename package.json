@@ -55,6 +55,7 @@
     "resolve-url-loader": "^4.0.0",
     "sass-loader": "^12.3.0",
     "semver": "^7.3.5",
+    "smoothscroll-polyfill": "^0.4.4",
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.3.1",
     "tailwindcss": "^3.0.2",
@@ -75,8 +76,8 @@
       "react-app",
       "react-app/jest"
     ],
-    "rules":{
-      "jsx-a11y/anchor-is-valid":"off"
+    "rules": {
+      "jsx-a11y/anchor-is-valid": "off"
     }
   },
   "browserslist": {

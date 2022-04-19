@@ -64,14 +64,14 @@ export default function request(url, options = {}) {
     .then(checkStatus)
     .then((response) => {
       const promise = response.json();
-      // promise.then((result) => {
-      //   if (result.error && result.errorCode === 10000) {
-      //     notification.error({
-      //       message: result.msg,
-      //       description: '登录已失效，请刷新页面重新登录',
-      //     });
-      //   }
-      // });
+      promise.then((result) => {
+        if (result.error && result.errorCode === 10000) {
+          notification.error({
+            message: result.msg,
+            description: '登录已失效，请刷新页面重新登录',
+          });
+        }
+      });
       return promise;
     })
     .catch((error) => {

@@ -44,7 +44,7 @@ function App(props) {
       <div>{props.children}</div>
       {tabs.find((item) => path.includes(item.key)) && (
         <TabBar
-          style={{ position: "fixed", width: "100%", bottom: 0 }}
+          style={{ position: "fixed", width: "100%", bottom: 0,background:'#fff' }}
           activeKey={activityKey}
           onChange={(key) => {
             navigate(`/${key}`);

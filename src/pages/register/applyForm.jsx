@@ -1,17 +1,9 @@
 //录入信息
 import React, { useState, useEffect } from "react";
-import {
-  NavBar,
-  Form,
-  List,
-  Input,
-  Cascader,
-  ImageUploader,
-} from "antd-mobile";
+import { NavBar, Form, List, Input, Cascader, Button } from "antd-mobile";
 import styles from "./index.less";
 import { useNavigate } from "react-router-dom";
-import { getStore } from "../../services/store";
-import { uploadCommonImage } from "../../services/image";
+import { getStore, updateStore } from "../../services/store";
 import { TYPE_OPTION, TYPE } from "./constants";
 import querystring from "querystring";
 import {
@@ -32,36 +24,41 @@ const Index = (props) => {
   };
   const [form] = Form.useForm();
   const [formData, setFormData] = useState({});
+  const [applyInfo, setApplyInfo] = useState({});
   useEffect(() => {
     //获取当前id店铺信息
     getStore({ _id: store_id }).then((res) => {
       if (res.success) {
-        setFormData(res.store.applyInfo);
-        form.setFields(res.store.applyInfo);
+        setApplyInfo(res.store.applyInfo);
+        // form.setFields(res.store.applyInfo);
       }
     });
   }, []);
-  const upDateInfo = () => {};
-  const imageUpload = (value) => {
-    // setFormData({ ...formData,...value})
-    console.log(value)
-    uploadCommonImage({
-      store: store_id,
-      files: [
-        {
-          name:value.name,
-          size:value.size,
-          filename:value.name,
-          originalname:'门脸图'
+  const upDateInfo = () => {
+    form.validateFields().then((value) => {
+      console.log({ ...formData, ...value });
+      const params = {
+        applyInfo: {
+          ...formData,
+          ...value,
         },
-      ],
-    }).then((res) => {});
+        _id: store_id,
+      };
+      updateStore(params).then((res) => {});
+    });
   };
+
   const STEPS = [
     { step: 0, name: "店铺信息" },
     { step: 1, name: "资质信息" },
     { step: 2, name: "代表人信息" },
   ];
+  const updateAndNext = () => {
+    if (step === 0) {
+      upDateInfo();
+    }
+    setStep((setp) => step + 1);
+  };
   return (
     <div className={styles.applyForm}>
       <NavBar
@@ -89,7 +86,7 @@ const Index = (props) => {
               <Input placeholder="请输入联系人" clearable />
             </Form.Item>
             <Form.Item label="联系电话" name="phoneNumber">
-              <Input placeholder="请输入联系电话" clearable type="password" />
+              <Input placeholder="请输入联系电话" clearable />
             </Form.Item>
           </List>
           <List mode="card">
@@ -109,27 +106,29 @@ const Index = (props) => {
           </List>
           <List mode="card">
             <Form.Item label="门脸图" name="outPhoto">
-              <ImageUploader
-                maxCount={1}
-                // value={formData.outPhoto ?? []}
-                // onChange={imageUpload}
-                upload={imageUpload}
+              <ImageUpload
+                value={[changeSaveFile(formData.outPhoto)]}
+                onChange={(fileList) => {
+                  const attachment = changeFileList(fileList, 0);
+                  setFormData({ ...formData, outPhoto: attachment });
+                }}
+                store={store_id}
               />
             </Form.Item>
             <Form.Item label="门店名称" name="name">
-              <Input placeholder="请输入门店名称" clearable type="password" />
+              <Input placeholder="请输入门店名称" clearable />
             </Form.Item>
           </List>
           <List mode="card">
             <Form.Item label="店内环境图" name="inPhoto">
-            <ImageUpload
-              value={[changeSaveFile(formData.inPhoto)]}
-              onChange={(fileList) => {
-                const attachment = changeFileList(fileList, 0);
-                setFormData({...formData, inPhoto:attachment});
-              }}
-              store={store_id}
-            />
+              <ImageUpload
+                value={[changeSaveFile(formData.inPhoto)]}
+                onChange={(fileList) => {
+                  const attachment = changeFileList(fileList, 0);
+                  setFormData({ ...formData, inPhoto: attachment });
+                }}
+                store={store_id}
+              />
             </Form.Item>
           </List>
         </Form>
@@ -137,6 +136,20 @@ const Index = (props) => {
       {step === 1 && 1}
       {step === 2 && 2}
       {/* </Card> */}
+      <Button
+        style={{
+          width: "90%",
+          margin: "5%",
+          borderRadius: "20px",
+          background: "#6495ED",
+          color: "#fff",
+          position: "absolute",
+          bottom: "20px",
+        }}
+        onClick={updateAndNext}
+      >
+        下一步
+      </Button>
       <Cascader
         options={TYPE_OPTION}
         visible={visible}

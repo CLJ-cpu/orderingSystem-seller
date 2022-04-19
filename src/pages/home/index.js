@@ -1,15 +1,15 @@
-import React from 'react'
+import React, {PureComponent} from 'react'
+import {Routes, Route} from 'react-router-dom'
+import Home from './home'
 
-import styles from './home.less'
- 
-const Index = () => {
-   
-  
-   return (
-      <div className={styles.home}>
-         <div className={styles.content}>
-            home
-         </div>
-      </div>)
+
+class Index extends PureComponent {
+  render() {
+    return (
+      <Routes>
+        <Route path="/" exact element={<Home/>} />
+      </Routes>
+    )
+  }
 }
 export default Index
